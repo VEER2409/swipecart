@@ -22,8 +22,15 @@ if (process.env.MONGO_URI) {
   console.log('MONGO_URI not provided. Skipping database connection.');
 }
 
-app.use('/api/auth', authRoutes);
+const categoryRoutes = require('./routes/categories');
+const productRoutes = require('./routes/products');
+const orderRoutes = require('./routes/orders');
 
+app.use('/api/auth', authRoutes);
+app.use('/api/categories', categoryRoutes);
+app.use('/api/products', productRoutes);
+app.use('/api/orders', orderRoutes);
+app.use('/api/admin/orders', require('./routes/adminOrders'));
 // Simple health check route
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'SwipeCart API is running' });
