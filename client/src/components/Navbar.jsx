@@ -42,7 +42,7 @@ const Navbar = () => {
             {user ? (
               <div className="flex items-center space-x-4">
                 <Link to="/my-orders" className="text-sm font-medium text-gray-700 hover:text-gray-900">My Orders</Link>
-                {user.role === 'admin' && <span className="text-sm font-medium text-indigo-600">Admin</span>}
+                {user.role === 'admin' && <Link to="/admin" className="text-sm font-medium text-indigo-600 hover:text-indigo-800">Admin Dashboard</Link>}
                 <button onClick={handleLogout} className="text-sm font-medium text-red-600 hover:text-red-900">Logout</button>
               </div>
             ) : (
@@ -76,6 +76,7 @@ const Navbar = () => {
             {user ? (
               <>
                 <Link to="/my-orders" className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">My Orders</Link>
+                {user.role === 'admin' && <Link to="/admin" className="block px-3 py-2 rounded-md text-base font-medium text-indigo-600 hover:bg-indigo-50">Admin Dashboard</Link>}
                 <button onClick={handleLogout} className="w-full text-left block px-3 py-2 rounded-md text-base font-medium text-red-600 hover:bg-gray-50">Logout</button>
               </>
             ) : (

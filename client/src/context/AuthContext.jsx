@@ -9,8 +9,19 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     const storedUser = localStorage.getItem('user');
-    if (token && storedUser) {
-      setUser(JSON.parse(storedUser));
+    
+    if (token && storedUser && storedUser !== 'undefined') {
+      try {
+        setUser(JSON.parse(storedUser));
+      } catch (err) {
+        console.error("Invalid auth data, clearing...");
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+      }
+    } else {
+      // Clear incomplete/invalid data
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
     }
     setLoading(false);
   }, []);
