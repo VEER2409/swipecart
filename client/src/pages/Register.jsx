@@ -18,8 +18,13 @@ const Register = () => {
     setLoading(true);
     try {
       const res = await api.post('/auth/register', formData);
-      login(res.data.token, res.data.user);
-      navigate('/');
+      if (res.data.token && res.data.user) {
+        login(res.data.token, res.data.user);
+        navigate('/');
+      } else {
+        // Backend only registered the user without auto-login
+        navigate('/login');
+      }
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed');
     } finally {
